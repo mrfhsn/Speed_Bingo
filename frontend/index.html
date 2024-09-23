@@ -3,30 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>BINGO</title>
+    <title>Speed Bingo - join The Game</title>
+    <link rel="stylesheet" href="css/logIn.css">
 </head>
 <body>
-    <h1 id="generated-number"></h1>
-    <div class="outline">
-        <div class="trio">
-            <button class="random-number clickable1"></button>
-            <button class="random-number clickable2"></button>
-            <button class="random-number clickable3"></button>
-        </div>
-        <div class="trio">
-            <button class="random-number clickable4"></button>
-            <button class="random-number clickable5"></button>
-            <button class="random-number clickable6"></button>
-        </div>
-        <div class="trio">
-            <button class="random-number clickable7"></button>
-            <button class="random-number clickable8"></button>
-            <button class="random-number clickable9"></button>
-        </div>
+    <div class="join-area">
+        <h2 id="welcome-message">Speed Bingo</h2>
+        <h1 class="entry-ins">Enter your name to play</h1>
+        <input type="text" id="entry-box">
+        <button id="join-button">JOIN</button>
     </div>
-    <button id="button">Generate</button>
-    <button id="reload-button" class="hidden">PLAY AGAIN</button>
-    <script src="bingo.js"></script>
+    <script src="javaScript/logIn.js"></script>
 </body>
 </html>
