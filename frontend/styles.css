@@ -28,12 +28,24 @@ h1
     font-size: 4rem;
     text-align: center;
     align-content: center;
+    background: none;
 }
-#button
+#button, #reload-button
 {
     width:18.56rem;
     height: 3rem;
     font-size: 2.1rem;
     font-weight: bold;
     border: none;
+}
+
+.hidden
+{
+    margin-top: 1rem;
+    display: none;
+}
+
+#reload-button
+{
+    margin-top: -3rem;
 }

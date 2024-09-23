@@ -2,9 +2,11 @@
 let isGenerated = false
 let correctCounter = 0
 
+
 // ID / Class initialization
 const boxNumber = document.querySelectorAll('.random-number')
 const button = document.getElementById('button')
+const reloadButton = document.getElementById('reload-button')
 const randomNumber = document.getElementById('generated-number')
 const clicked1 = document.querySelector('.clickable1')
 const clicked2 = document.querySelector('.clickable2')
@@ -16,12 +18,15 @@ const clicked7 = document.querySelector('.clickable7')
 const clicked8 = document.querySelector('.clickable8')
 const clicked9 = document.querySelector('.clickable9')
 
+
 // Action declaration
 boxNumber.forEach(box => {
         box.innerText = Math.floor(Math.random() * 9) + 1
     }
 )
+
 button.addEventListener("click", randomNumberGenerator)
+reloadButton.addEventListener("click", reloadFunction)
 
 clicked1.addEventListener("click", () => checker(clicked1))
 clicked2.addEventListener("click", () => checker(clicked2))
@@ -33,12 +38,14 @@ clicked7.addEventListener("click", () => checker(clicked7))
 clicked8.addEventListener("click", () => checker(clicked8))
 clicked9.addEventListener("click", () => checker(clicked9))
 
+
 // All functions
 function randomNumberGenerator() {
     randomNumber.innerText = Math.floor(Math.random() * 9) + 1
     randomNumber.style.color = "#000"
     isGenerated = true;
 }
+
 function checker(buttonVariable) {
     if(isGenerated) {
         if(buttonVariable.innerText === randomNumber.innerText) {
@@ -46,20 +53,22 @@ function checker(buttonVariable) {
             randomNumber.style.color = "#36cc43"
 
             correctCounter++
-
-            if(correctCounter === 9) winFunction()
         }
-        else {
-            buttonVariable.disabled = true
-            randomNumber.style.color = "#f61a1a"
-            buttonVariable.style.color = "#f61a1a"
-        }
+        else randomNumber.style.color = "#f61a1a"
     }
     isGenerated = false
+    if(correctCounter === 9) result()
 }
-function winFunction() {
+
+function result() {
     button.disabled = true
+    reloadButton.classList.remove('hidden')
     randomNumber.style.fontSize = "3rem"
     randomNumber.style.textAlign = "center"
-    randomNumber.innerText = "Congratulations!!! You Win"
+    randomNumber.innerText = "You Won"
+}
+
+function reloadFunction() {
+    location.reload()
+    reloadButton.classList.add('hidden')
 }
