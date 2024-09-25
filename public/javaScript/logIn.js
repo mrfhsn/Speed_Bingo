@@ -16,8 +16,16 @@ inputName.addEventListener("keypress", function(pressed)
 
 function sendName()
 {
-    const playerName = inputName.value   
-    message.innerText = `Welcome ${playerName}\nPlease wait...`;
+    const playerName = inputName.value
+    let spaceCounter = 0;
+
+    for(let i = 0; i < playerName.length; i++) {
+        if(playerName[i] === ' ') spaceCounter++
+    }
+    if(playerName.length !== 0 && spaceCounter < playerName.length) {
+        message.innerText = `Welcome ${playerName}\nPlease wait...`
+        window.open("lobby.html", "_blank")
+    }
     socket.emit('playerName', playerName);
 }
 
