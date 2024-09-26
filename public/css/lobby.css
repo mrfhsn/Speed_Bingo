@@ -9,6 +9,12 @@ body {
     width: 50vw;
     height: 50vh;
     border: 1px solid;
+    overflow-y: scroll;
+}
+p {
+    font-size: 1.58rem;
+    font-weight: bold;
+    padding-left: 2rem;
 }
 .buttons {
     width: 50vw;
