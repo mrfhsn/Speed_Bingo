@@ -1,11 +1,11 @@
-/* *
+body
 {
-    border: 1px solid;
-} */
-
+    margin: 0;
+}
 .exit-button
 {
     margin-top: 1rem;
+    margin-bottom: -1.5rem;
     display: flex;
     justify-content: flex-end;
 }
@@ -13,7 +13,8 @@
 {
     font-size: 2.1rem;
     font-weight: bold;
-    margin-right: 2rem;
+    margin-right: 1.2vw;
+    border-radius: .3rem;
 }
 #exit-button:hover
 {
@@ -24,14 +25,8 @@
     );
     color: white;
 }
-.anouncer
-{
-    display: flex;
-    justify-content: center;
-}
 h1
 {
-    width: 18.56rem;
     height: 5rem;
     margin-bottom: 3.5rem;
     font-size: 5rem;
@@ -40,19 +35,27 @@ h1
 }
 .game-area
 {
-    /* width: 90vw; */
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+}
+.score-box:first-of-type
+{
+    margin-right: 3rem;
+}
+.score-box:last-of-type
+{
+    margin-left: 3rem;
 }
 .your-score
 {
     font-size: 2rem;
-    font-weight: bolder;
+    font-weight: bold;
     text-align: center;
 }
 .score
 {
     border: .3rem solid;
+    border-radius: .7rem;
     width: 12rem;
     height: 6rem;
     border-color: rgb(209, 81, 42);
@@ -81,6 +84,7 @@ h1
 }
 .buttons
 {
+    margin-top: -2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
