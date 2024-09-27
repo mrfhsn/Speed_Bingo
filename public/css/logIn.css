@@ -1,19 +1,19 @@
 body
 {
-    height: 100vh;
-    background: linear-gradient(
-      90deg,
-      rgba(76, 150, 235, 0.774),
-      rgba(196, 105, 238, 0.884)
-    );
+    margin: 0;
 }
 .join-area
 {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30vh;
-    text-align: center;
+    justify-content: center;
+    background: linear-gradient(
+      45deg,
+      rgba(76, 150, 235, 0.774),
+      rgba(248, 206, 150, 0.466) 80%
+    );
 }
 #welcome-message
 {
@@ -34,16 +34,14 @@ h1
     height: 3rem;
     border-radius: 1.5rem;
     border: none;
-    margin-bottom: 2rem;
+    margin-bottom: 1.6rem;
     font-size: 1.7rem;
     text-align: center;
 }
 #join-button
 {
     border-radius: 0.7rem;
-    height: 2.5rem;
-    width: 10rem;
     border: none;
-    font-size: 1.7rem;
+    font-size: 2.7rem;
     font-weight: bold;
 }
