@@ -4,29 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
-    <title>BINGO</title>
+    <title>Speed Bingo - The Game</title>
 </head>
 <body>
-    <h1 id="generated-number"></h1>
-    <div class="outline">
-        <div class="trio">
-            <button class="random-number clickable1"></button>
-            <button class="random-number clickable2"></button>
-            <button class="random-number clickable3"></button>
+    <div class="exit-button">
+        <button id="exit-button">LEAVE</button>
+    </div>
+    <div class="anouncer">
+        <h1 id="generated-number"></h1>
+    </div>
+    <div class="game-area">
+        <div class="score-box">
+            <p class="your-score">Your Score</p>
+            <p class="score" id="scoreboard1">0</p>
         </div>
-        <div class="trio">
-            <button class="random-number clickable4"></button>
-            <button class="random-number clickable5"></button>
-            <button class="random-number clickable6"></button>
+        <div class="four-by-four">
+            <div class="quadro">
+                <button class="random-number clickable1"></button>
+                <button class="random-number clickable2"></button>
+                <button class="random-number clickable3"></button>
+                <button class="random-number clickable4"></button>
+            </div>
+            <div class="quadro">
+                <button class="random-number clickable5"></button>
+                <button class="random-number clickable6"></button>
+                <button class="random-number clickable7"></button>
+                <button class="random-number clickable8"></button>
+            </div>
+            <div class="quadro">
+                <button class="random-number clickable9"></button>
+                <button class="random-number clickable10"></button>
+                <button class="random-number clickable11"></button>
+                <button class="random-number clickable12"></button>
+            </div>
+            <div class="quadro">
+                <button class="random-number clickable13"></button>
+                <button class="random-number clickable14"></button>
+                <button class="random-number clickable15"></button>
+                <button class="random-number clickable16"></button>
+            </div>
         </div>
-        <div class="trio">
-            <button class="random-number clickable7"></button>
-            <button class="random-number clickable8"></button>
-            <button class="random-number clickable9"></button>
+        <div class="score-box">
+            <p class="your-score">Your Score</p>
+            <p class="score" id="scoreboard2">0</p>
         </div>
     </div>
-    <button id="button">Generate</button>
-    <button id="reload-button" class="hidden">PLAY AGAIN</button>
+    <div class="buttons">
+        <button id="button">Generate</button>
+        <button id="reload-button" class="hidden">PLAY AGAIN</button>
+    </div>
     <script src="javaScript/bingo.js"></script>
 </body>
 </html>

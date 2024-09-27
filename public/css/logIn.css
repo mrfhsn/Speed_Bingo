@@ -1,10 +1,11 @@
-html
+body
 {
+    height: 100vh;
     background: linear-gradient(
       90deg,
       rgba(76, 150, 235, 0.774),
       rgba(196, 105, 238, 0.884)
-   );    
+    );
 }
 .join-area
 {
@@ -13,24 +14,26 @@ html
     align-items: center;
     margin-top: 30vh;
     text-align: center;
-    /* background-color: transparent; */
 }
 #welcome-message
 {
     font-size: 2rem;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Arial Narrow Bold', sans-serif;
     margin-bottom: -2rem;
+    color: rgb(0, 0, 0);
 }
 h1
 {
-    font-size: 3.5rem;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 3.1rem;
+    font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(73, 25, 25);
 }
 #entry-box
 {
-    width: 30rem;
-    height: 5vh;
-    border-radius: 3rem;
+    width: 22rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    border: none;
     margin-bottom: 2rem;
     font-size: 1.7rem;
     text-align: center;
@@ -38,7 +41,7 @@ h1
 #join-button
 {
     border-radius: 0.7rem;
-    height: 5vh;
+    height: 2.5rem;
     width: 10rem;
     border: none;
     font-size: 1.7rem;
