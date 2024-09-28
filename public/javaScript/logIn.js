@@ -11,6 +11,7 @@ inputName.addEventListener("keypress", function(pressed)
 {
     if(pressed.key === 'Enter') sendName()
 })
+window.onload = defaultCursor
 
 // All functions
 
@@ -27,6 +28,11 @@ function sendName()
         window.open("lobby.html", "_blank")
     }
     socket.emit('playerName', playerName);
+}
+
+function defaultCursor()
+{
+    inputName.focus()
 }
 
 
