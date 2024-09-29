@@ -25,7 +25,9 @@ function sendName()
     }
     if(playerName.length !== 0 && spaceCounter < playerName.length) {
         message.innerText = `Welcome ${playerName}\nPlease wait...`
-        window.open("lobby.html", "_blank")
+        setTimeout(() => {
+            window.location.href = "lobby.html"
+        }, 3500)
     }
     socket.emit('playerName', playerName);
 }
