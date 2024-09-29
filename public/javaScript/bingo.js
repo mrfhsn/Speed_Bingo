@@ -1,9 +1,12 @@
 // Variables
+
 let isGenerated = false
 let correctCounter = 0
+let countDownEnded = false
 
 
 // ID / Class initialization
+
 const boxNumber = document.querySelectorAll('.random-number')
 const button = document.getElementById('button')
 const reloadButton = document.getElementById('reload-button')
@@ -59,6 +62,7 @@ clicked16.addEventListener("click", () => checker(clicked16))
 
 
 // All functions
+
 function randomNumberGenerator() {
     randomNumber.innerText = Math.floor(Math.random() * 16) + 1
     randomNumber.style.color = "#000"
@@ -69,6 +73,7 @@ function checker(buttonVariable) {
     if(isGenerated) {
         if(buttonVariable.innerText === randomNumber.innerText) {
             buttonVariable.disabled = true
+            buttonVariable.style.color = "#f7f7f7"
             randomNumber.style.color = "#36cc43"
 
             correctCounter++
@@ -95,5 +100,10 @@ function reloadFunction() {
 }
 
 function exitTheGame() {
-    window.location.href = "index.html"
+    // window.location.href = "index.html"
+
+    document.getElementById('bingo-div').style.display = "none"
+    document.getElementById('lobby-div').style.display = "none"
+    document.querySelector('.join-area').style.display = ""
+    location.reload()
 }

@@ -35,12 +35,14 @@ const playerInfo = [
     }
 ]
 
+
 // id & class intialization
 
 const addPlayer = document.getElementById('add-button')
 const leavePlayer = document.getElementById('leave-button')
-const joinGame = document.getElementById('join-button')
+const joinGame = document.getElementById('join-button-lobby')
 const playerList = document.querySelector('.player-list')
+
 
 // Declaring Actions
 
@@ -48,16 +50,18 @@ addPlayer.addEventListener("click", playerAdder)
 leavePlayer.addEventListener("click", playerTerminator)
 joinGame.addEventListener("click", goToGame)
 
+
 //All Functions
 
 function playerAdder() {
     if(array.length > 0) {
         array.sort()
-        const HTMLString = `<p id="player-serial${playerInfo[array[0]].serial}">${playerInfo[array[0]].serial}. ${playerInfo[array[0]].playerName} ${playerInfo[array[0]].serial}</p>`
+        const HTMLString = `<p id="player-serial${playerInfo[array[0]].serial}" class="players-name">${playerInfo[array[0]].serial}. ${playerInfo[array[0]].playerName} ${playerInfo[array[0]].serial}</p>`
         playerList.insertAdjacentHTML("beforeend", HTMLString)
         array.shift()
     }
 }
+
 function playerTerminator() {
     if(array.length < 7) {
         let randomNumber = Math.floor(Math.random() * 7) + 1
@@ -67,6 +71,30 @@ function playerTerminator() {
         console.log(array)
     }
 }
+
 function goToGame() {
-    window.open("game.html", "_blank")
+
+    button.disabled = true
+    exitButton.disabled = true
+    document.querySelector('.join-area').style.display = "none"
+    document.getElementById('lobby-div').style.display = "none"
+    document.getElementById('bingo-div').style.display = ""
+
+    if(!countDownEnded) {
+        let timeLeft = 4
+    
+        const countdownInterval = setInterval(() => {
+            timeLeft -= 1
+            randomNumber.textContent = timeLeft
+    
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval)
+                randomNumber.textContent = "GO!"
+                button.disabled = false
+                exitButton.disabled = false
+            }
+        }, 1000)
+    
+        countDownEnded = true
+    }
 }
