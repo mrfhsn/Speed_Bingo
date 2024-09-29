@@ -1,6 +1,7 @@
 // Variables
 let isGenerated = false
 let correctCounter = 0
+let countDownEnded = false
 
 
 // ID / Class initialization
@@ -36,6 +37,22 @@ boxNumber.forEach(box => {
     }
 )
 
+if(!countDownEnded) {
+    let timeLeft = 4
+
+    const countdownInterval = setInterval(() => {
+        timeLeft -= 1
+        randomNumber.textContent = timeLeft
+
+        if (timeLeft <= 0) {
+            clearInterval(countdownInterval)
+            randomNumber.textContent = "GO!"
+        }
+    }, 1000)
+
+    countDownEnded = true
+}
+
 button.addEventListener("click", randomNumberGenerator)
 reloadButton.addEventListener("click", reloadFunction)
 exitButton.addEventListener("click", exitTheGame)
@@ -59,6 +76,7 @@ clicked16.addEventListener("click", () => checker(clicked16))
 
 
 // All functions
+
 function randomNumberGenerator() {
     randomNumber.innerText = Math.floor(Math.random() * 16) + 1
     randomNumber.style.color = "#000"
