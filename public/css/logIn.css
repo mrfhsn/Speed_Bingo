@@ -1,35 +1,32 @@
-body
-{
+body {
     margin: 0;
 }
-.join-area
-{
+
+.join-area {
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(
-      45deg,
-      rgba(76, 150, 235, 0.774),
-      rgba(248, 206, 150, 0.466) 80%
-    );
+    background: linear-gradient(45deg,
+            rgba(76, 150, 235, 0.774),
+            rgba(248, 206, 150, 0.466) 80%);
 }
-#welcome-message
-{
+
+#welcome-message {
     font-size: 2rem;
     font-family: 'Arial Narrow Bold', sans-serif;
     margin-bottom: -2rem;
     color: rgb(0, 0, 0);
 }
-h1
-{
+
+h1 {
     font-size: 3.1rem;
     font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: rgb(73, 25, 25);
 }
-#entry-box
-{
+
+#entry-box {
     width: 22rem;
     height: 3rem;
     border-radius: 1.5rem;
@@ -38,8 +35,8 @@ h1
     font-size: 1.7rem;
     text-align: center;
 }
-#join-button
-{
+
+#join-button {
     border-radius: 0.7rem;
     border: none;
     font-size: 2.7rem;
