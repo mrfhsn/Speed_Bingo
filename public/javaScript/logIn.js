@@ -27,7 +27,7 @@ function sendName()
         message.innerText = `Welcome ${playerName}\nPlease wait...`
         setTimeout(() => {
             window.location.href = "lobby.html"
-        }, 3500)
+        }, 2500)
     }
     socket.emit('playerName', playerName);
 }
