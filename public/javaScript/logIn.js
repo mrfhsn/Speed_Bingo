@@ -1,5 +1,7 @@
 // Connect to the server dynamically
 const socket = io();
+// const socket = io('http://192.168.1.105:3000');
+
 let ID;
 
 socket.on('client-count', (count) => {
