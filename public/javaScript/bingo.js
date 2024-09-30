@@ -39,7 +39,7 @@ boxNumber.forEach(box => {
     }
 )
 
-button.addEventListener("click", randomNumberGenerator)
+// button.addEventListener("click", randomNumberGenerator)
 reloadButton.addEventListener("click", reloadFunction)
 exitButton.addEventListener("click", exitTheGame)
 
@@ -61,10 +61,21 @@ clicked15.addEventListener("click", () => checker(clicked15))
 clicked16.addEventListener("click", () => checker(clicked16))
 
 
+button.disabled = true;
+button.hidden = true;
+
 // All functions
 
-function randomNumberGenerator() {
-    randomNumber.innerText = Math.floor(Math.random() * 16) + 1
+socket.on('random', (data) => {
+
+    console.log(data.num);
+    randomNumberGenerator(data.num);
+    
+})
+
+function randomNumberGenerator(num) {
+    // randomNumber.innerText = Math.floor(Math.random() * 16) + 1
+    randomNumber.innerText = num;
     randomNumber.style.color = "#000"
     isGenerated = true;
 }
@@ -82,17 +93,35 @@ function checker(buttonVariable) {
         }
         else randomNumber.style.color = "#f61a1a"
     }
+
     isGenerated = false
-    if(correctCounter === 16) result()
+    if(correctCounter === 16) win()
 }
 
-function result() {
+function win() {
     button.disabled = true
     reloadButton.classList.remove('hidden')
     randomNumber.style.fontSize = "3rem"
     randomNumber.style.textAlign = "center"
     randomNumber.innerText = "You Won"
+
+    socket.emit('win', {});
 }
+
+
+socket.on('lose', () => {
+    lose();
+})
+
+function lose() {
+    button.disabled = true
+    reloadButton.classList.remove('hidden')
+    randomNumber.style.fontSize = "3rem"
+    randomNumber.style.textAlign = "center"
+    randomNumber.innerText = "You Lose"
+}
+
+
 
 function reloadFunction() {
     location.reload()
@@ -100,10 +129,12 @@ function reloadFunction() {
 }
 
 function exitTheGame() {
-    // window.location.href = "index.html"
+    // window.location.href = "thanks.html"
+    // no coming back...
+    window.location.replace("/thanks");
 
-    document.getElementById('bingo-div').style.display = "none"
-    document.getElementById('lobby-div').style.display = "none"
-    document.querySelector('.join-area').style.display = ""
-    location.reload()
+    // document.getElementById('bingo-div').style.display = "none"
+    // document.getElementById('lobby-div').style.display = "none"
+    // document.querySelector('.join-area').style.display = ""
+    // location.reload()
 }

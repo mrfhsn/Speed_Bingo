@@ -3,7 +3,6 @@ const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
 
-
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
@@ -16,8 +15,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // client.html or index.html -> landing page
 app.get('/', (req, res) => {
 
-    // res.sendFile(path.join(__dirname, 'client.html'));
     res.sendFile(path.join(__dirname, 'index.html'));
+
+});
+
+app.get('/thanks', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'public', 'thanks.html'));
 
 });
 
@@ -28,32 +32,36 @@ app.use('/socket.io', express.static(path.join(__dirname, 'node_modules/socket.i
 // new connections
 let client = 0;
 let ids = [];
-let num = 0;
+// let num = 0;
 
 io.on('connection', (socket) => {
 
     client++;
-    // p.set_no(client);
-    // p.set_id(socket.id);
     ids.push(socket.id);
+    console.log(ids);
 
     console.log(`New client connected. Total clients: ${client}`);
 
-    io.emit('client count: ', client);
+    io.emit('client-count', client);
 
-    // socket.on('playerName', (playerName) => {
-
-    //     console.log(`Message received: ${playerName}`);
-    //     p.set_name(playerName);
-    //     console.log(p);
-
-    // });
 
     socket.on('disconnect', () => {
 
         client--;
+        // console.log("Disconnected: ", socket.id);
+
+        for(let i=0; i<ids.length; i++)
+        {
+            if(ids[i] == socket.id)
+            {
+                delete ids[i];
+                break;
+            }
+        }
+
         console.log(`Client disconnected. Total clients: ${client}`);
-        io.emit('client', client);
+        // console.log(ids);        
+        // io.emit('client-count', client);
 
     });
 
@@ -64,16 +72,16 @@ io.on('connection', (socket) => {
     {
         constructor()
         {
-            this.no;
+            this.host = false;
             this.id;
             this.name;
             this.point = 0;
             this.play = false;
         }
 
-        set_no(no)
+        set_host()
         {
-            this.no = no;
+            this.host = true;
         }
 
         set_id(id)
@@ -111,11 +119,14 @@ io.on('connection', (socket) => {
 
         createPlayer(sid, playerName)
         {
-            num++;
-            plyr.set_no(num);
+            if(ids[0] === sid) plyr.set_host();
             plyr.set_id(sid);
             plyr.set_name(playerName);  
-            console.log(plyr);
+            // console.log(plyr);
+
+            socket.emit('self-info', {
+                info: plyr
+            })
 
             this.players.push(plyr);
         }
@@ -131,15 +142,50 @@ io.on('connection', (socket) => {
         }
     }
 
-    game = new Game();
-    // game.createPlayer();
+    const game = new Game();
+
 
     socket.on('playerName', (playerName) => {
 
-        console.log(`Message received: ${playerName}`);
+        // console.log(`Message received: ${playerName}`);
         game.createPlayer(socket.id, playerName);
 
+        console.log(game.players);
+        
+        io.emit('plyers-data', {
+            data: game.players
+        })
+
     });
+
+
+    socket.on('game', () => {
+
+        io.emit('to-game', {})
+    })
+
+
+    socket.on('random-start', () => {
+        setTimeout(generate, 3000);
+    })
+
+
+    function generate()
+    {
+        let int = setInterval(() => {
+            
+            io.emit('random', {
+                num: (Math.floor(Math.random() * 16) + 1)
+            })
+
+        }, 1400)
+
+        socket.on('win', () => {
+            
+            clearInterval(int);
+            socket.broadcast.emit('lose', {});
+        })
+    }
 
 });
 
@@ -152,11 +198,3 @@ server.listen(3000, '0.0.0.0', () => {
 
 });
 
-
-/**
- * io.emit -> to all clients
- * 
- * socket.emit -> to the client from whom data is received
- * socket.broadcast.emit -> to all the client except from whom data is received
- * 
- */

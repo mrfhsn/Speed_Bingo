@@ -1,44 +1,35 @@
-// Variable declaration
+let client_count;
+let players;
 
-let i = 0;
 
-let array = [0, 1, 2, 3, 4, 5, 6]
+socket.on('client-count', (count) => {
 
-const playerInfo = [
-    {
-        serial: 1,
-        playerName: "Player"
-    },
-    {
-        serial: 2,
-        playerName: "Player"
-    },
-    {
-        serial: 3,
-        playerName: "Player"
-    },
-    {
-        serial: 4,
-        playerName: "Player"
-    },
-    {
-        serial: 5,
-        playerName: "Player"
-    },
-    {
-        serial: 6,
-        playerName: "Player"
-    },
-    {
-        serial: 7,
-        playerName: "Player"
-    }
-]
+    client_count = count;
+})
 
+socket.on('plyers-data', (data) => {
+
+    players = data.data;
+    // console.log(players);
+    // console.log(players[0].name);   
+
+    playerAdder();
+})
+
+// join button clicked
+function game()
+{
+    socket.emit('game', {})
+    socket.emit('random-start', {});
+}
+
+socket.on('to-game', () => {
+
+    goToGame();
+})
 
 // id & class intialization
 
-const addPlayer = document.getElementById('add-button')
 const leavePlayer = document.getElementById('leave-button')
 const joinGame = document.getElementById('join-button-lobby')
 const playerList = document.querySelector('.player-list')
@@ -46,30 +37,35 @@ const playerList = document.querySelector('.player-list')
 
 // Declaring Actions
 
-addPlayer.addEventListener("click", playerAdder)
 leavePlayer.addEventListener("click", playerTerminator)
-joinGame.addEventListener("click", goToGame)
+// joinGame.addEventListener("click", goToGame)
+joinGame.addEventListener("click", game)
 
 
 //All Functions
 
+// let i = 0;
+
 function playerAdder() {
-    if(array.length > 0) {
-        array.sort()
-        const HTMLString = `<p id="player-serial${playerInfo[array[0]].serial}" class="players-name">${playerInfo[array[0]].serial}. ${playerInfo[array[0]].playerName} ${playerInfo[array[0]].serial}</p>`
-        playerList.insertAdjacentHTML("beforeend", HTMLString)
-        array.shift()
-    }
+    // const HTMLString = `<p id="player-serial${playerInfo[array[0]].serial}" class="players-name">${playerInfo[array[0]].serial}. ${playerInfo[array[0]].playerName} ${playerInfo[array[0]].serial}</p>`
+    // i++;
+    const HTMLString = `<p id="player-serial${players[0].id}" class="players-name"> -> ${players[0].name}</p>`;
+    playerList.insertAdjacentHTML("beforeend", HTMLString)
+
 }
 
-function playerTerminator() {
-    if(array.length < 7) {
-        let randomNumber = Math.floor(Math.random() * 7) + 1
-        const toBeRemoved = document.getElementById(`player-serial${randomNumber}`)
-        toBeRemoved.remove()
-        array.unshift(randomNumber - 1)
-        console.log(array)
-    }
+function playerTerminator()
+{
+    const toBeRemoved = document.getElementById(`player-serial${ID}`)
+    toBeRemoved.remove()
+    out();
+}
+
+function out()
+{
+    document.querySelector('.join-area').style.display = ""
+    document.getElementById('lobby-div').style.display = "none"
+    document.getElementById('bingo-div').style.display = "none"
 }
 
 function goToGame() {
@@ -90,8 +86,10 @@ function goToGame() {
             if (timeLeft <= 0) {
                 clearInterval(countdownInterval)
                 randomNumber.textContent = "GO!"
-                button.disabled = false
+                // button.disabled = false
                 exitButton.disabled = false
+
+                // socket.emit('random-start', {});
             }
         }, 1000)
     
