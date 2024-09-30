@@ -194,9 +194,9 @@ io.on('connection', (socket) => {
 // server on port 3000
 server.listen(3000, '0.0.0.0', () => {
 
-    // console.log('http://localhost:3000');
-    let ip = "192.168.154.66";
-    console.log(`http://${ip}:3000`);
+    console.log('http://localhost:3000');
+    // let ip = "192.168.154.66";
+    // console.log(`http://${ip}:3000`);
 
 });
 
