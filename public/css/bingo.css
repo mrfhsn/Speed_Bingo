@@ -11,6 +11,8 @@
     }
 }
 
+/* Styles: */
+
 html {
     font-size: calc(1rem - 0.1rem);
 }
@@ -34,7 +36,7 @@ html {
     font-size: 5rem;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    animation: slide-in 4000ms ease-in-out; /* Comment this line if does not work */
+    animation: slide-in 500ms ease-in-out;
 }
 
 .game-area {
