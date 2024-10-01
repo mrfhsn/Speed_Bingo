@@ -40,7 +40,7 @@ boxNumber.forEach(box => {
 )
 
 // button.addEventListener("click", randomNumberGenerator)
-reloadButton.addEventListener("click", reloadFunction)
+// reloadButton.addEventListener("click", reloadFunction)
 exitButton.addEventListener("click", exitTheGame)
 
 clicked1.addEventListener("click", () => checker(clicked1))
@@ -68,7 +68,7 @@ button.hidden = true;
 
 socket.on('random', (data) => {
 
-    console.log(data.num);
+    // console.log(data.num);
     randomNumberGenerator(data.num);
     
 })
@@ -95,41 +95,47 @@ function checker(buttonVariable) {
     }
 
     isGenerated = false
-    if(correctCounter === 16) win()
+    if(correctCounter === 16)
+    {
+        socket.emit('win', {});
+        win()
+    }
 }
 
+
 function win() {
+
     button.disabled = true
-    reloadButton.classList.remove('hidden')
+    // reloadButton.classList.remove('hidden')
     randomNumber.style.fontSize = "3rem"
     randomNumber.style.textAlign = "center"
     randomNumber.innerText = "You Won"
-
-    socket.emit('win', {});
 }
 
 
 socket.on('lose', () => {
-    lose();
-})
 
-function lose() {
     button.disabled = true
-    reloadButton.classList.remove('hidden')
+    // reloadButton.classList.remove('hidden')
     randomNumber.style.fontSize = "3rem"
     randomNumber.style.textAlign = "center"
     randomNumber.innerText = "You Lose"
-}
+})
 
 
 
 function reloadFunction() {
-    location.reload()
-    reloadButton.classList.add('hidden')
+    // location.reload()
+    // reloadButton.classList.add('hidden')
+
+    document.getElementById('bingo-div').style.display = "none"
+    document.getElementById('lobby-div').style.display = ""
+    document.querySelector('.join-area').style.display = "none"
 }
 
 function exitTheGame() {
     // window.location.href = "thanks.html"
+    
     // no coming back...
     window.location.replace("/thanks");
 

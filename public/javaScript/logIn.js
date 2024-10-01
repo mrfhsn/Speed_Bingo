@@ -1,35 +1,24 @@
 // Connect to the server dynamically
 const socket = io();
-// const socket = io('http://192.168.1.105:3000');
 
 let ID;
-
-socket.on('client-count', (count) => {
-    // console.log('Connected clients:', count);
-    // console.log(socket.id);
-    ID = socket.id;
-});
-
-
 let self;
 
 socket.on('self-info', (data) => {
 
     self = data.info;
-    // console.log(self);
-    
-    if(!self.host)
-    {
-        // the join is button is hidden for other playres, only host can make that join
-        joinGame.disabled = true;
-        joinGame.hidden = true;
-    }
+    ID = self.id;
+    // console.log(self);   
 })
+
+
+// `````````````````````````````````
 
 
 // Element initialization
 const joinButton = document.getElementById('join-button')
-const message = document.getElementById('welcome-message')
+// const message = document.getElementById('welcome-message')
+const message = document.getElementById('h1');
 const inputName = document.getElementById('entry-box')
 
 
@@ -65,7 +54,7 @@ function sendName()
             document.getElementById('lobby-div').style.display = ""
             document.getElementById('bingo-div').style.display = "none"
             document.querySelector('.join-area').style.display = "none"
-        }, 1500)
+        }, 1000)
     }
 
     socket.emit('playerName', playerName);

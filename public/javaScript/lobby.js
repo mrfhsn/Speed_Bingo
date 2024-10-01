@@ -1,17 +1,15 @@
 let client_count;
-let players;
+let players = [];
 
-
-socket.on('client-count', (count) => {
-
-    client_count = count;
-})
-
-socket.on('plyers-data', (data) => {
+socket.on('players-data', (data) => {
 
     players = data.data;
-    // console.log(players);
-    // console.log(players[0].name);   
+    // console.log(players); 
+
+    if(ID === players[0].id)
+    {
+        joinGame.hidden = false;
+    }
 
     playerAdder();
 })
@@ -28,6 +26,10 @@ socket.on('to-game', () => {
     goToGame();
 })
 
+
+// ``````````````````````````
+
+
 // id & class intialization
 
 const leavePlayer = document.getElementById('leave-button')
@@ -38,35 +40,27 @@ const playerList = document.querySelector('.player-list')
 // Declaring Actions
 
 leavePlayer.addEventListener("click", playerTerminator)
-// joinGame.addEventListener("click", goToGame)
 joinGame.addEventListener("click", game)
 
 
 //All Functions
 
-// let i = 0;
-
 function playerAdder() {
-    // const HTMLString = `<p id="player-serial${playerInfo[array[0]].serial}" class="players-name">${playerInfo[array[0]].serial}. ${playerInfo[array[0]].playerName} ${playerInfo[array[0]].serial}</p>`
-    // i++;
-    const HTMLString = `<p id="player-serial${players[0].id}" class="players-name"> -> ${players[0].name}</p>`;
-    playerList.insertAdjacentHTML("beforeend", HTMLString)
 
+    playerList.innerHTML = "";  
+
+    for(let i=0; i<players.length; i++)
+    {
+        const HTMLString = `<p id="player-serial${players[i].id}" class="players-name"> [${i+1}] ${players[i].name}</p>`;
+        playerList.insertAdjacentHTML("beforeend", HTMLString)
+    }
 }
 
 function playerTerminator()
 {
-    const toBeRemoved = document.getElementById(`player-serial${ID}`)
-    toBeRemoved.remove()
-    out();
+    window.location.replace("/thanks");
 }
 
-function out()
-{
-    document.querySelector('.join-area').style.display = ""
-    document.getElementById('lobby-div').style.display = "none"
-    document.getElementById('bingo-div').style.display = "none"
-}
 
 function goToGame() {
 
@@ -81,15 +75,13 @@ function goToGame() {
     
         const countdownInterval = setInterval(() => {
             timeLeft -= 1
-            randomNumber.textContent = timeLeft
+            randomNumber.textContent = `Starts in ${timeLeft}`;
     
             if (timeLeft <= 0) {
                 clearInterval(countdownInterval)
                 randomNumber.textContent = "GO!"
                 // button.disabled = false
                 exitButton.disabled = false
-
-                // socket.emit('random-start', {});
             }
         }, 1000)
     

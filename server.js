@@ -12,7 +12,7 @@ const io = socketIo(server);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// client.html or index.html -> landing page
+// index.html -> landing page
 app.get('/', (req, res) => {
 
     res.sendFile(path.join(__dirname, 'index.html'));
@@ -32,7 +32,7 @@ app.use('/socket.io', express.static(path.join(__dirname, 'node_modules/socket.i
 // new connections
 let client = 0;
 let ids = [];
-// let num = 0;
+let players = []
 
 io.on('connection', (socket) => {
 
@@ -42,28 +42,7 @@ io.on('connection', (socket) => {
 
     console.log(`New client connected. Total clients: ${client}`);
 
-    io.emit('client-count', client);
-
-
-    socket.on('disconnect', () => {
-
-        client--;
-        // console.log("Disconnected: ", socket.id);
-
-        for(let i=0; i<ids.length; i++)
-        {
-            if(ids[i] == socket.id)
-            {
-                delete ids[i];
-                break;
-            }
-        }
-
-        console.log(`Client disconnected. Total clients: ${client}`);
-        // console.log(ids);        
-        // io.emit('client-count', client);
-
-    });
+    // io.emit('client-count', client);
 
 
     // ```````````````````````````````````````````````````
@@ -75,8 +54,6 @@ io.on('connection', (socket) => {
             this.host = false;
             this.id;
             this.name;
-            this.point = 0;
-            this.play = false;
         }
 
         set_host()
@@ -93,70 +70,60 @@ io.on('connection', (socket) => {
         {
             this.name = name;
         }
-
-        point_add()
-        {
-            this.point++;
-        }
-
-        plays()
-        {
-            this.play = true;
-        }
-
     }
 
-    plyr = new Player();
+    // let plyr = new Player();
 
     class Game
     {
         constructor()
         {
-            this.players = [];
             this.start = false;
             this.win_player;
         }
 
         createPlayer(sid, playerName)
         {
-            if(ids[0] === sid) plyr.set_host();
+            let plyr = new Player();
+
             plyr.set_id(sid);
             plyr.set_name(playerName);  
             // console.log(plyr);
 
             socket.emit('self-info', {
+
                 info: plyr
             })
 
-            this.players.push(plyr);
+            players.push(plyr);
         }
 
-        game_start()
-        {
-            this.start = true;
-        }
-
-        game_end()
-        {
-            this.start = false;
-        }
     }
 
-    const game = new Game();
+    let game = new Game();
 
+
+    // `````````````````````
 
     socket.on('playerName', (playerName) => {
 
-        // console.log(`Message received: ${playerName}`);
         game.createPlayer(socket.id, playerName);
 
-        console.log(game.players);
-        
-        io.emit('plyers-data', {
-            data: game.players
-        })
+        // set the 1st player as host
+        players[0].set_host();
 
+        sendPlayerData();
     });
+
+
+    function sendPlayerData()
+    {
+        // console.log(players);        
+        io.emit('players-data', {
+
+            data: players
+        })
+    }
 
 
     socket.on('game', () => {
@@ -166,7 +133,8 @@ io.on('connection', (socket) => {
 
 
     socket.on('random-start', () => {
-        setTimeout(generate, 3000);
+
+        setTimeout(generate, 4000);
     })
 
 
@@ -186,6 +154,42 @@ io.on('connection', (socket) => {
             socket.broadcast.emit('lose', {});
         })
     }
+
+
+    socket.on('disconnect', () => {
+
+        client--;
+        // console.log("Disconnected: ", socket.id);
+
+        for(let i=0; i<ids.length; i++)
+        {
+            if(ids[i] == socket.id) delete ids[i];
+            if(players[i])
+            {
+                if(players[i].id == socket.id) delete players[i];
+            }
+        }
+
+        let t_ids = [];
+        let t_players = [];
+        for(let i=0; i<ids.length; i++)
+        {
+            if(ids[i]) t_ids.push(ids[i]);
+            if(players[i]) t_players.push(players[i]);
+        }
+
+        ids = t_ids;
+        players = t_players;
+
+        // set the updated 1st player as host
+        if(players[0]) players[0].set_host();
+
+        console.log(`Client disconnected. Total clients: ${client}`);
+        // console.log(ids);
+
+        sendPlayerData();
+
+    });
 
 });
 
