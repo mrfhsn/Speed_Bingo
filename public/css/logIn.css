@@ -24,6 +24,7 @@ h1 {
     font-size: 3.1rem;
     font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: rgb(73, 25, 25);
+    text-align: center;
 }
 
 #entry-box {
