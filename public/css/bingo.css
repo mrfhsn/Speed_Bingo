@@ -36,7 +36,7 @@ html {
     font-size: 5rem;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    animation: slide-in 500ms ease-in-out;
+    animation: slide-in 250ms ease-in-out;
 }
 
 .game-area {
