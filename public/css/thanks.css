@@ -17,6 +17,7 @@ body {
 
 .thanks-msg {
     font-family: monospace;
+    text-align: center;
     font-size: 4rem;
     margin-top: 0;
     color: rgb(9, 40, 68);
