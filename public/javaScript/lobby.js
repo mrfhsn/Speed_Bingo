@@ -61,10 +61,12 @@ function playerTerminator()
     window.location.replace("/thanks");
 }
 
+// revision
+let countDownEnded = false
 
 function goToGame() {
 
-    button.disabled = true
+    // button.disabled = true
     exitButton.disabled = true
     document.querySelector('.join-area').style.display = "none"
     document.getElementById('lobby-div').style.display = "none"

@@ -2,14 +2,13 @@
 
 let isGenerated = false
 let correctCounter = 0
-let countDownEnded = false
 let is_win = false;
 
 
 // ID / Class initialization
 
 const boxNumber = document.querySelectorAll('.random-number')
-const button = document.getElementById('button')
+// const button = document.getElementById('button')
 const reloadButton = document.getElementById('reload-button')
 const randomNumber = document.getElementById('generated-number')
 const exitButton = document.getElementById('exit-button')
@@ -62,27 +61,37 @@ clicked15.addEventListener("click", () => checker(clicked15))
 clicked16.addEventListener("click", () => checker(clicked16))
 
 
-button.disabled = true;
-button.hidden = true;
+// button.disabled = true;
+// button.hidden = true;
 
 // All functions
 
 socket.on('random', (data) => {
 
     // console.log(data.num);
-    randomNumber.style.animation = 'none'
-    randomNumber.offsetHeight
-    randomNumber.style.animation = ''
-    if(!is_win) randomNumberGenerator(data.num);
+    // randomNumber.style.animation = 'none'
+    // randomNumber.offsetHeight
+    // randomNumber.style.animation = ''
+    // if(!is_win) randomNumberGenerator(data.num);
+    if(!is_win)
+    {
+        randomNumber.style.animation = 'none'
+        randomNumber.offsetHeight
+        randomNumber.style.animation = ''
+
+        randomNumber.innerText = data.num;
+        randomNumber.style.color = "#000"
+        isGenerated = true;
+    }
     
 })
 
-function randomNumberGenerator(num) {
-    // randomNumber.innerText = Math.floor(Math.random() * 16) + 1
-    randomNumber.innerText = num;
-    randomNumber.style.color = "#000"
-    isGenerated = true;
-}
+// function randomNumberGenerator(num) {
+//     // randomNumber.innerText = Math.floor(Math.random() * 16) + 1
+//     randomNumber.innerText = num;
+//     // randomNumber.style.color = "#000"
+//     isGenerated = true;
+// }
 
 function checker(buttonVariable) {
     if(isGenerated) {
@@ -101,30 +110,34 @@ function checker(buttonVariable) {
     isGenerated = false
     if(correctCounter === 16)
     {
-        socket.emit('win', {});
+        is_win = true;
         win()
+        socket.emit('win', {});
     }
 }
 
 
 function win() {
 
-    button.disabled = true
-    is_win = true;
+    // button.disabled = true
+    // is_win = true;
     // reloadButton.classList.remove('hidden')
     randomNumber.style.fontSize = "3rem"
     randomNumber.style.textAlign = "center"
     randomNumber.innerText = "You Won"
+    randomNumber.style.color = "#00ee00"
+
 }
 
 
 socket.on('lose', () => {
 
-    button.disabled = true
+    // button.disabled = true
     // reloadButton.classList.remove('hidden')
     randomNumber.style.fontSize = "3rem"
     randomNumber.style.textAlign = "center"
     randomNumber.innerText = "You Lose"
+    randomNumber.style.color = "#990000"
 })
 
 
