@@ -1,3 +1,18 @@
+/* Animations: */
+
+@keyframes slide-in {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
+/* Styles: */
+
 html {
     font-size: calc(1rem - 0.1rem);
 }
@@ -21,6 +36,7 @@ html {
     font-size: 5rem;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
+    animation: slide-in 500ms ease-in-out;
 }
 
 .game-area {

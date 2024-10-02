@@ -69,6 +69,9 @@ button.hidden = true;
 socket.on('random', (data) => {
 
     // console.log(data.num);
+    randomNumber.style.animation = 'none'
+    randomNumber.offsetHeight
+    randomNumber.style.animation = ''
     randomNumberGenerator(data.num);
     
 })
