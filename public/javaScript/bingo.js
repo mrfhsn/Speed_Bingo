@@ -3,6 +3,7 @@
 let isGenerated = false
 let correctCounter = 0
 let countDownEnded = false
+let is_win = false;
 
 
 // ID / Class initialization
@@ -72,7 +73,7 @@ socket.on('random', (data) => {
     randomNumber.style.animation = 'none'
     randomNumber.offsetHeight
     randomNumber.style.animation = ''
-    randomNumberGenerator(data.num);
+    if(!is_win) randomNumberGenerator(data.num);
     
 })
 
@@ -109,6 +110,7 @@ function checker(buttonVariable) {
 function win() {
 
     button.disabled = true
+    is_win = true;
     // reloadButton.classList.remove('hidden')
     randomNumber.style.fontSize = "3rem"
     randomNumber.style.textAlign = "center"
@@ -127,14 +129,14 @@ socket.on('lose', () => {
 
 
 
-function reloadFunction() {
-    // location.reload()
-    // reloadButton.classList.add('hidden')
+// function reloadFunction() {
+//     // location.reload()
+//     // reloadButton.classList.add('hidden')
 
-    document.getElementById('bingo-div').style.display = "none"
-    document.getElementById('lobby-div').style.display = ""
-    document.querySelector('.join-area').style.display = "none"
-}
+//     document.getElementById('bingo-div').style.display = "none"
+//     document.getElementById('lobby-div').style.display = ""
+//     document.querySelector('.join-area').style.display = "none"
+// }
 
 function exitTheGame() {
     // window.location.href = "thanks.html"

@@ -32,7 +32,8 @@ app.use('/socket.io', express.static(path.join(__dirname, 'node_modules/socket.i
 // new connections
 let client = 0;
 let ids = [];
-let players = []
+let players = [];
+let gen = false;
 
 io.on('connection', (socket) => {
 
@@ -134,26 +135,45 @@ io.on('connection', (socket) => {
 
     socket.on('random-start', () => {
 
-        setTimeout(generate, 4000);
+        gen = true;
+        setTimeout(generate, 5500);
+
     })
+
+
+    // function generate()
+    // {
+    //     let int = setInterval(() => {
+            
+    //         io.emit('random', {
+    //             num: (Math.floor(Math.random() * 16) + 1)
+    //         })
+
+    //     }, 1400)
+
+    //     socket.on('win', () => {
+            
+    //         clearInterval(int);
+    //         socket.broadcast.emit('lose', {});
+    //     })
+    // }
 
 
     function generate()
     {
-        let int = setInterval(() => {
-            
-            io.emit('random', {
-                num: (Math.floor(Math.random() * 16) + 1)
-            })
-
-        }, 1400)
-
-        socket.on('win', () => {
-            
-            clearInterval(int);
-            socket.broadcast.emit('lose', {});
+        io.emit('random', {
+            num: (Math.floor(Math.random() * 16) + 1)
         })
+
+        if(gen) setTimeout(generate, 1400);
     }
+
+    socket.on('win', () => {
+            
+        // clearInterval(int);
+        gen = false
+        socket.broadcast.emit('lose', {});
+    })
 
 
     socket.on('disconnect', () => {
