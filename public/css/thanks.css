@@ -7,6 +7,10 @@ body {
     );
 }
 
+h1{
+    text-align: center;
+}
+
 .rejoin-page {
     display: flex;
     flex-direction: column;
