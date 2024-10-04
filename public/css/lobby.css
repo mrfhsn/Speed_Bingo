@@ -2,7 +2,7 @@
     width: 50vw;
     height: 50vh;
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 25vw;
     border: 0.4rem solid gainsboro;
     border-radius: 1rem;
     overflow-y: scroll;
@@ -18,7 +18,7 @@
 .lobby-buttons {
     width: 50vw;
     margin-top: 1rem;
-    margin-left: 10px;
+    margin-left: 29vw;
     display: flex;
     justify-content: space-between;
 }

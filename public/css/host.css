@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+}
+
+.host-join-buttons {
+    height: 99vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(
+        40deg,
+        rgba(6, 6, 85, 0.966),
+        rgb(19, 18, 18)
+    );
+}
+
+#host-button,
+#join-button-host {
+    font-size: 4rem;
+    font-family: monospace;
+    font-weight: bold;
+    width: 15rem;
+    border-radius: .3rem;
+    cursor: default;
+    background: linear-gradient(
+        180deg,
+        grey,
+        rgb(224, 220, 220)
+    );
+    text-align: center;
+    color: rgba(60, 6, 77, 0.925);
+    box-shadow: violet;
+    border: 5px solid rgba(97, 95, 95, 0.671);
+}
+
+#host-button:active,
+#join-button-host:active {
+    filter: brightness(0.5);
+}
+
+#join-button-host {
+    margin-top: 1rem;
+}
