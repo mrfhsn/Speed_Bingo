@@ -83,6 +83,17 @@ socket.on('random', (data) => {
         randomNumber.style.color = "#000"
         isGenerated = true;
     }
+    // else {
+    //     socket.on('lose', () => {
+
+    //         // button.disabled = true
+    //         // reloadButton.classList.remove('hidden')
+    //         randomNumber.style.fontSize = "3rem"
+    //         randomNumber.style.textAlign = "center"
+    //         randomNumber.innerText = "You Lose"
+    //         randomNumber.style.color = "#990000"
+    //     })
+    // }
     
 })
 
@@ -133,11 +144,11 @@ function win() {
 socket.on('lose', () => {
 
     // button.disabled = true
-    // reloadButton.classList.remove('hidden')
-    randomNumber.style.fontSize = "3rem"
-    randomNumber.style.textAlign = "center"
-    randomNumber.innerText = "You Lose"
-    randomNumber.style.color = "#990000"
+    // // reloadButton.classList.remove('hidden')
+    // randomNumber.style.fontSize = "3rem"
+    // randomNumber.style.textAlign = "center"
+    // randomNumber.innerText = "You Lose"
+    // randomNumber.style.color = "#990000"
 })
 
 
