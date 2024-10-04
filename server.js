@@ -159,6 +159,14 @@ io.on('connection', (socket) => {
     // }
 
 
+    socket.on('win', () => {
+            
+        // clearInterval(int);
+        gen = false
+        socket.broadcast.emit('lose', {});
+    })
+
+
     function generate()
     {
         io.emit('random', {
@@ -166,14 +174,12 @@ io.on('connection', (socket) => {
         })
 
         if(gen) setTimeout(generate, 1400);
+        else {
+            io.emit('random', {
+                num: "You Lost"
+            })
+        }
     }
-
-    socket.on('win', () => {
-            
-        // clearInterval(int);
-        gen = false
-        socket.broadcast.emit('lose', {});
-    })
 
 
     socket.on('disconnect', () => {
@@ -219,8 +225,7 @@ io.on('connection', (socket) => {
 server.listen(3000, '0.0.0.0', () => {
 
     // console.log('http://localhost:3000');
-    let ip = "10.29.163.158";
-    // let ip = "192.168.202.66";
+    let ip = "10.29.57.50";
     console.log(`http://${ip}:3000`);
 
 });
