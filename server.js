@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
+const os = require('os');
 
 const app = express();
 const server = http.createServer(app);
@@ -141,24 +142,6 @@ io.on('connection', (socket) => {
     })
 
 
-    // function generate()
-    // {
-    //     let int = setInterval(() => {
-            
-    //         io.emit('random', {
-    //             num: (Math.floor(Math.random() * 16) + 1)
-    //         })
-
-    //     }, 1400)
-
-    //     socket.on('win', () => {
-            
-    //         clearInterval(int);
-    //         socket.broadcast.emit('lose', {});
-    //     })
-    // }
-
-
     socket.on('win', () => {
             
         // clearInterval(int);
@@ -170,13 +153,14 @@ io.on('connection', (socket) => {
     function generate()
     {
         io.emit('random', {
-            num: (Math.floor(Math.random() * 16) + 1)
+            info: (Math.floor(Math.random() * 16) + 1)
         })
 
         if(gen) setTimeout(generate, 1400);
-        else {
+        else
+        {
             io.emit('random', {
-                num: "You Lost"
+                info: "You Lost"
             })
         }
     }
@@ -220,13 +204,24 @@ io.on('connection', (socket) => {
 });
 
 
+// fot auto ip config
+const networkInterfaces = os.networkInterfaces();
 
 // server on port 3000
 server.listen(3000, '0.0.0.0', () => {
 
     // console.log('http://localhost:3000');
-    let ip = "10.29.57.50";
-    console.log(`http://${ip}:3000`);
+
+    // let ip = "10.29.57.50";
+    // console.log(`http://${ip}:3000`);
+
+    // => for wifi
+    const IP = networkInterfaces['Wi-Fi'][1].address;
+    console.log(`http://${IP}:3000`);
+
+    // => for lan, but if you have multiple lan interfaces it may make problems.
+    // const IP = networkInterfaces.Ethernet[1].address;
+    // console.log(`http://${IP}:3000`);
 
 });
 
