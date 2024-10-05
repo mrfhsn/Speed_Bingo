@@ -68,32 +68,25 @@ clicked16.addEventListener("click", () => checker(clicked16))
 
 socket.on('random', (data) => {
 
-    // console.log(data.num);
+    // console.log(data.info);
     // randomNumber.style.animation = 'none'
     // randomNumber.offsetHeight
     // randomNumber.style.animation = ''
-    // if(!is_win) randomNumberGenerator(data.num);
+    // if(!is_win) randomNumberGenerator(data.info);
     if(!is_win)
     {
         randomNumber.style.animation = 'none'
         randomNumber.offsetHeight
         randomNumber.style.animation = ''
 
-        randomNumber.innerText = data.num;
-        randomNumber.style.color = "#000"
+        randomNumber.innerText = data.info;
+
+        if(data.info === "You Lost") randomNumber.style.color = "#990000";
+        else randomNumber.style.color = "#000";
+
         isGenerated = true;
     }
-    // else {
-    //     socket.on('lose', () => {
 
-    //         // button.disabled = true
-    //         // reloadButton.classList.remove('hidden')
-    //         randomNumber.style.fontSize = "3rem"
-    //         randomNumber.style.textAlign = "center"
-    //         randomNumber.innerText = "You Lose"
-    //         randomNumber.style.color = "#990000"
-    //     })
-    // }
     
 })
 
@@ -133,34 +126,14 @@ function win() {
     // button.disabled = true
     // is_win = true;
     // reloadButton.classList.remove('hidden')
-    randomNumber.style.fontSize = "3rem"
-    randomNumber.style.textAlign = "center"
+    // randomNumber.style.fontSize = "3rem"
+    // randomNumber.style.textAlign = "center"
     randomNumber.innerText = "You Won"
     randomNumber.style.color = "#00ee00"
 
 }
 
 
-socket.on('lose', () => {
-
-    // button.disabled = true
-    // // reloadButton.classList.remove('hidden')
-    // randomNumber.style.fontSize = "3rem"
-    // randomNumber.style.textAlign = "center"
-    // randomNumber.innerText = "You Lose"
-    // randomNumber.style.color = "#990000"
-})
-
-
-
-// function reloadFunction() {
-//     // location.reload()
-//     // reloadButton.classList.add('hidden')
-
-//     document.getElementById('bingo-div').style.display = "none"
-//     document.getElementById('lobby-div').style.display = ""
-//     document.querySelector('.join-area').style.display = "none"
-// }
 
 function exitTheGame() {
     // window.location.href = "thanks.html"
@@ -168,8 +141,4 @@ function exitTheGame() {
     // no coming back...
     window.location.replace("/thanks");
 
-    // document.getElementById('bingo-div').style.display = "none"
-    // document.getElementById('lobby-div').style.display = "none"
-    // document.querySelector('.join-area').style.display = ""
-    // location.reload()
 }
