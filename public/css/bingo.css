@@ -25,6 +25,11 @@ html {
 
 #bingo-div {
     height: 100vh;
+    background: linear-gradient(
+        135deg,
+        white,
+        rgba(128, 128, 128, 0.37)
+    );
 }
 
 .logo-div {
