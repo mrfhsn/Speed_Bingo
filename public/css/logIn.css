@@ -28,8 +28,8 @@ body {
 
 h1 {
     font-size: 3.1rem;
-    font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: rgb(73, 25, 25);
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgba(10, 40, 46, 0.904);
     text-align: center;
 }
 
@@ -37,6 +37,7 @@ h1 {
     width: 22rem;
     height: 3rem;
     border-radius: 1.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: none;
     margin-bottom: 1.6rem;
     font-size: 1.7rem;
@@ -45,6 +46,7 @@ h1 {
 
 #join-button {
     border-radius: 0.7rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: none;
     font-size: 2.7rem;
     font-weight: bold;
