@@ -39,25 +39,26 @@ inputName.addEventListener("keypress", function (pressed) {
 
 function sendName()
 {
-    joinButton.disabled = true
     const playerName = inputName.value
     let spaceCounter = 0;
-
+    
     for (let i = 0; i < playerName.length; i++) {
         if (playerName[i] === ' ') spaceCounter++
     }
-
-    if (playerName.length !== 0 && spaceCounter < playerName.length)
-    {
+    
+    if (playerName.length !== 0 && spaceCounter < playerName.length) {
+        
+        joinButton.disabled = true
         message.innerText = `Welcome ${playerName}\nPlease wait...`
+
         setTimeout(() => {
             document.getElementById('lobby-div').style.display = ""
             document.getElementById('bingo-div').style.display = "none"
             document.querySelector('.join-area').style.display = "none"
         }, 1000)
+        
+        socket.emit('playerName', playerName);
     }
-
-    socket.emit('playerName', playerName);
 }
 
 function defaultCursor() {
