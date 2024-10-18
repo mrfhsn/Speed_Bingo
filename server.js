@@ -204,7 +204,7 @@ io.on('connection', (socket) => {
 });
 
 
-// fot auto ip config
+// for auto ip config
 const networkInterfaces = os.networkInterfaces();
 
 // server on port 3000
