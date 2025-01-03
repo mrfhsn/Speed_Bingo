@@ -2,8 +2,7 @@
 
 ### Install packages
 ```
-npm init -y
-npm install express socket.io
+npm install
 ```
 
 ---
